@@ -25,6 +25,6 @@ I completed this guided AWS lab to practice connecting Amazon S3, AWS Lambda, an
 
 These are expected counts for manual testing. The handler reads the entire object into memory and processes only the first record in each event. It treats punctuation as part of a word when there is no intervening whitespace.
 
-## Screenshots
+## Lab evidence
 
-The [`screenshots/`](screenshots/) directory is reserved for lab screenshots to be added later.
+[View the screenshot index](screenshots/README.md) for the AWS setup and the word-count result recorded in CloudWatch.
