@@ -27,4 +27,12 @@ These are expected counts for manual testing. The handler reads the entire objec
 
 ## Lab evidence
 
-[View the screenshot index](screenshots/README.md) for the AWS setup and the word-count result recorded in CloudWatch.
+**Upload to S3 → Count words in Lambda → Publish the result to SNS**
+
+1. Upload a `.txt` file to the S3 input bucket.
+2. Open the latest Lambda log stream in CloudWatch and check the count.
+3. If you configured an email subscription, look for the **Word Count Result** notification.
+
+In the recorded run, CloudWatch shows **10 words** for `sample3.txt`.
+
+[Follow the full walkthrough](screenshots/README.md) · [Open the screenshot gallery](screenshots/README.md#screenshot-gallery)
