@@ -1,8 +1,36 @@
-# Lab Evidence
+# AWS Word Counter Lab Walkthrough
 
-These screenshots document the guided AWS word counter lab. Open any entry to view the full-size capture. Account and resource identifiers, subscription details, and log identifiers are masked where applicable.
+This walkthrough documents a guided AWS lab. Follow the steps in order, then use the [screenshot gallery](#screenshot-gallery) to review the setup and the recorded result.
 
-| Step | Screenshot | What it shows |
+**Workflow:** Upload a `.txt` file to S3 → S3 invokes Lambda → Lambda counts the words → Lambda publishes the result to SNS. CloudWatch records the invocation and the word count.
+
+## 1. Set up SNS notifications
+
+In **Amazon SNS → Topics → Create topic**, select **Standard** and create a topic. Open the topic, choose **Create subscription**, select **Email**, and enter your email address. Open the confirmation message and verify that the subscription shows **Confirmed** in the SNS console.
+
+## 2. Deploy and configure Lambda
+
+In **AWS Lambda → Functions**, create a Python function. Add [`lambda_function.py`](../lambda_function.py), set the handler to `lambda_function.lambda_handler`, and deploy the code. In **Configuration → Environment variables**, add `SNS_TOPIC_ARN` with the ARN of your topic.
+
+The execution role needs permission to read the input objects (`s3:GetObject`), publish to the topic (`sns:Publish`), and write logs to CloudWatch.
+
+## 3. Connect the S3 trigger
+
+In the Lambda function overview, choose **Add trigger → S3**. Select an input bucket in the same AWS Region as the function, choose **All object create events**, and set the suffix filter to `.txt`.
+
+## 4. Upload a test file and check the result
+
+Upload a sample from [`tests/fixtures/`](../tests/fixtures/) to the input bucket. In **Lambda → Monitor → View CloudWatch logs**, open the latest log stream and compare the result with the [expected counts](../README.md#sample-inputs). If you confirmed an email subscription, check for an SNS message with the subject **Word Count Result**.
+
+In the recorded lab run, CloudWatch shows that Lambda processed `sample3.txt` and logged a count of **10 words**.
+
+---
+
+## Screenshot gallery
+
+Open any link to view the capture at full size. Sensitive details are masked where applicable.
+
+| # | Screenshot | What it shows |
 | --- | --- | --- |
 | 1 | [SNS topic setup](01-sns-topic-setup.png) | The Standard topic option selected in the SNS console. |
 | 2 | [SNS confirmation email](02-sns-confirmation-email.png) | The email requesting confirmation of the topic subscription. |
