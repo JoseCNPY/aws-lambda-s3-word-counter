@@ -1,3 +1,5 @@
+> This project is now maintained in [aws-proyectos/projects/lambda-s3-word-counter](https://github.com/JoseCNPY/aws-proyectos/tree/main/projects/lambda-s3-word-counter). This repository preserves the original files and commit history.
+
 # AWS Lambda S3 Word Counter
 
 I completed this guided AWS lab to practice connecting Amazon S3, AWS Lambda, and Amazon SNS in an event-driven workflow. The repository contains the Python handler from the lab and sample inputs for repeating the exercise.
